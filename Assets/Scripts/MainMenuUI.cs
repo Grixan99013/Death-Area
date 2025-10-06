@@ -13,7 +13,6 @@ public class MainMenuUI : MonoBehaviour
 
 	private void Awake()
 	{
-		// Настраиваем кнопки если они не назначены
 		if (startButton == null)
 		{
 			startButton = GetComponentInChildren<Button>();
@@ -22,7 +21,6 @@ public class MainMenuUI : MonoBehaviour
 
 	private void Start()
 	{
-		// Подписываемся на события кнопок
 		if (startButton != null)
 		{
 			startButton.onClick.AddListener(StartGame);
@@ -36,7 +34,7 @@ public class MainMenuUI : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		// Отписываемся от событий кнопок
+	
 		if (startButton != null)
 		{
 			startButton.onClick.RemoveListener(StartGame);
@@ -50,13 +48,13 @@ public class MainMenuUI : MonoBehaviour
 
 	public void StartGame()
 	{
-		// Загружаем игровую сцену
+
 		SceneManager.LoadScene(gameSceneName);
 	}
 
 	public void QuitGame()
 	{
-		// Выходим из игры
+
 		#if UNITY_EDITOR
 			UnityEditor.EditorApplication.isPlaying = false;
 		#else

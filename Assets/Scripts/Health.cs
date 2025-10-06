@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
 	{
 		if (IsDead || amount <= 0f) return;
 		CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
-		lastDamageTime = Time.time; // Обновляем время последнего урона
+		lastDamageTime = Time.time;
 		onDamaged?.Invoke();
 
 		if (CurrentHealth <= 0f)
@@ -74,10 +74,8 @@ public class Health : MonoBehaviour
 
 	private void RegenerateHealth()
 	{
-		// Проверяем, прошло ли достаточно времени с последнего урона
 		if (Time.time - lastDamageTime >= regenDelay)
 		{
-			// Восстанавливаем здоровье
 			float regenAmount = regenRate * Time.deltaTime;
 			CurrentHealth = Mathf.Clamp(CurrentHealth + regenAmount, 0f, maxHealth);
 		}

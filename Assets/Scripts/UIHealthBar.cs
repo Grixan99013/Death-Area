@@ -10,7 +10,7 @@ public class UIHealthBar : MonoBehaviour
 	[SerializeField] private bool showNumericText = true;
 
 	[Header("Update Settings")]
-	[SerializeField] private float updateInterval = 0.1f; // Обновление каждые 0.1 секунды
+	[SerializeField] private float updateInterval = 0.1f;
 
 	private float lastUpdateTime;
 	private float lastKnownHealth;
@@ -36,10 +36,10 @@ public class UIHealthBar : MonoBehaviour
 
 	private void Update()
 	{
-		// Обновляем UI с заданным интервалом для отображения регенерации
+
 		if (targetHealth != null && Time.time - lastUpdateTime >= updateInterval)
 		{
-			// Проверяем, изменилось ли здоровье (включая регенерацию)
+
 			if (Mathf.Abs(targetHealth.CurrentHealth - lastKnownHealth) > 0.1f)
 			{
 				Refresh();
@@ -97,7 +97,6 @@ public class UIHealthBar : MonoBehaviour
 			healthText.text = "";
 		}
 
-		// Обновляем последнее известное значение здоровья
 		lastKnownHealth = targetHealth.CurrentHealth;
 	}
 } 

@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
 			{
 				crosshairCanvasGroup = crosshairUI.AddComponent<CanvasGroup>();
 			}
-			// Изначально прицел скрыт
 			crosshairCanvasGroup.alpha = 0f;
 		}
 	}
@@ -95,20 +94,20 @@ public class PlayerController : MonoBehaviour
 	{
 		if (cameraTransform == null) return;
 		
-		// Получаем ввод мыши
+
 		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
 		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 		
-		// Инвертируем Y если нужно
+
 		if (invertY)
 		{
 			mouseY = -mouseY;
 		}
 		
-		// Поворот игрока по горизонтали (Y-ось)
+
 		transform.Rotate(Vector3.up * mouseX);
 		
-		// Поворот камеры по вертикали (X-ось)
+
 		xRotation -= mouseY;
 		xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
 		cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
@@ -116,18 +115,16 @@ public class PlayerController : MonoBehaviour
 	
 	private void HandleAiming()
 	{
-		isAiming = Input.GetButton("Fire2"); // Правая кнопка мыши
+		isAiming = Input.GetButton("Fire2");
 	}
 	
 	private void HandleCamera()
 	{
 		if (playerCamera == null || cameraTransform == null) return;
 		
-		// Плавное изменение FOV
 		float targetFOV = isAiming ? aimingFOV : normalFOV;
 		playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
 		
-		// Плавное изменение позиции камеры
 		Vector3 targetPosition = isAiming ? 
 			originalCameraPosition + aimingCameraPosition : 
 			originalCameraPosition;
@@ -139,7 +136,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (crosshairCanvasGroup == null) return;
 		
-		// Плавное появление/исчезновение прицела
 		float targetAlpha = isAiming ? 1f : 0f;
 		crosshairCanvasGroup.alpha = Mathf.Lerp(crosshairCanvasGroup.alpha, targetAlpha, crosshairTransitionSpeed * Time.deltaTime);
 	}
@@ -158,7 +154,6 @@ public class PlayerController : MonoBehaviour
         
         Vector3 move = transform.right * x + transform.forward * z;
         
-        // Замедляем движение при прицеливании
         float currentMoveSpeed = isAiming ? moveSpeed * aimingMoveSpeedMultiplier : moveSpeed;
         characterController.Move(move * currentMoveSpeed * Time.deltaTime);
         

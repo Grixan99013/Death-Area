@@ -7,6 +7,7 @@ public class UIGameOver : MonoBehaviour
 	[Header("Bindings")]
 	[SerializeField] private GameObject gameOverPanel;
 	[SerializeField] private Button restartButton;
+	[SerializeField] private Button mainMenuButton;
 	[SerializeField] private Health playerHealth;
 
 	[Header("Hotkeys")]
@@ -21,6 +22,10 @@ public class UIGameOver : MonoBehaviour
 		if (restartButton != null)
 		{
 			restartButton.onClick.AddListener(RestartLevel);
+		}
+		if (mainMenuButton != null)
+		{
+			mainMenuButton.onClick.AddListener(GoToMainMenu);
 		}
 	}
 
@@ -71,5 +76,11 @@ public class UIGameOver : MonoBehaviour
 		Time.timeScale = 1f;
 		Scene current = SceneManager.GetActiveScene();
 		SceneManager.LoadScene(current.buildIndex);
+	}
+
+	public void GoToMainMenu()
+	{
+		Time.timeScale = 1f;
+		SceneManager.LoadScene("MainMenu");
 	}
 } 

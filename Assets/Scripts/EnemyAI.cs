@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
 		if (target == null) return;
 		
 		Vector3 direction = (target.position - transform.position).normalized;
-		direction.y = 0; // Не наклоняем врага вверх/вниз
+		direction.y = 0; 
 		
 		if (direction != Vector3.zero)
 		{
@@ -86,18 +86,15 @@ public class EnemyAI : MonoBehaviour
 	{
 		if (target == null) return;
 
-		// Создаем снаряд
 		GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 		
-		// Направляем снаряд в сторону игрока
 		Vector3 shootDirection = (target.position - firePoint.position).normalized;
 		bullet.transform.rotation = Quaternion.LookRotation(shootDirection);
 		
-		// Инициализируем снаряд
 		Projectile projectileScript = bullet.GetComponent<Projectile>();
 		if (projectileScript != null)
 		{
-			projectileScript.Initialize(transform, true); // true = прицельная стрельба
+			projectileScript.Initialize(transform, true);
 		}
 	}
 } 

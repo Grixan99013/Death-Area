@@ -24,11 +24,9 @@ public class Projectile : MonoBehaviour
 		}
 		rb.useGravity = false;
 		
-		// Применяем разброс точности
 		Vector3 direction = transform.forward;
 		if (!isAiming)
 		{
-			// Добавляем случайный разброс при обычной стрельбе
 			direction += Random.insideUnitSphere * accuracySpread;
 			direction.Normalize();
 		}
